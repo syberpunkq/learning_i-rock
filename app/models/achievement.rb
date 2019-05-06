@@ -8,7 +8,6 @@ class Achievement < ApplicationRecord
     scope: :user_id,
     message: "you can't have two achievements with the same title"
   }
-  # validate :unique_title_for_one_user
 
   enum privacy: [ :public_access, :private_access, :friends_access ]
 
@@ -18,5 +17,9 @@ class Achievement < ApplicationRecord
 
   def silly_title
     "#{title} by #{user.email}"
+  end
+
+  def self.by_letter(letter)
+    where("title LIKE ?", "#{letter}%")
   end
 end
