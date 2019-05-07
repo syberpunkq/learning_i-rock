@@ -20,6 +20,6 @@ class Achievement < ApplicationRecord
   end
 
   def self.by_letter(letter)
-    where("title LIKE ?", "#{letter}%")
+    joins(:user).where("title LIKE ?", "#{letter}%").order('users.email')
   end
 end

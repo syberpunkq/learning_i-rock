@@ -26,5 +26,11 @@ RSpec.describe Achievement, type: :model do
     expect(Achievement.by_letter('R')).to eq([achievement1])
   end
 
-  
+  it 'sorts achievements by user emails' do
+    albert = FactoryBot.create(:user, email: 'albert@email.com')
+    rob = FactoryBot.create(:user, email: 'rob@email.com')
+    achievement1 = FactoryBot.create(:public_achievement, title: 'Read a book', user: rob)
+    achievement2 = FactoryBot.create(:public_achievement, title: 'Rocked it', user: albert)
+    expect(Achievement.by_letter('R')).to eq([achievement2, achievement1])
+  end
 end
